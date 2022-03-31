@@ -37,7 +37,7 @@ public class BasketService {
                             .toList()
             );
         } catch (ResourceNotFoundException e) {
-            log.error("Could not find resource: [{}]",e.getMessage());
+            log.error("Could not find resource: [{}]", e.getMessage());
             throw e;
         }
 

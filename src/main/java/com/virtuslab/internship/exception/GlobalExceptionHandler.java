@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler({ResourceNotFoundException.class, EmptyBasketException.class})
     ResponseEntity<Object> handleResourceNotFoundException(WebRequest request,
-                                                           ResourceNotFoundException e) {
+                                                           RuntimeException e) {
         var status = HttpStatus.BAD_REQUEST;
         var restApiError = new RestApiError(LocalDateTime.now(), status, e.getMessage());
         return handleExceptionInternal(e, restApiError, new HttpHeaders(), status, request);

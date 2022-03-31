@@ -1,6 +1,7 @@
 package com.virtuslab.internship.basket;
 
 import com.virtuslab.internship.basket.dto.BasketRequestDto;
+import com.virtuslab.internship.exception.EmptyBasketException;
 import com.virtuslab.internship.product.dto.ProductRequestDto;
 import com.virtuslab.internship.receipt.dto.ReceiptDto;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,9 @@ public class BasketController {
 
     @PostMapping("basket/receipt")
     public ReceiptDto generateReceipt(@RequestBody BasketRequestDto basketDTO) {
+        if (basketDTO.products() == null || basketDTO.products().isEmpty())
+            throw new EmptyBasketException("Basket can not be empty!");
+
         log.info("Received basket [{}]", basketDTO);
         var receipt = basketService.generateReceiptWithDiscounts(basketDTO);
         log.info("Returning calculated receipt [{}]", receipt);
@@ -28,6 +32,9 @@ public class BasketController {
 
     @PostMapping("basket/receipt/names")
     public ReceiptDto generateReceipt(@RequestBody List<String> productNamesList) {
+        if (productNamesList == null || productNamesList.isEmpty())
+            throw new EmptyBasketException("Basket can not be empty!");
+
         log.info("Received list of products [{}]", productNamesList);
         var basketDTO = new BasketRequestDto(
                 productNamesList.stream()
