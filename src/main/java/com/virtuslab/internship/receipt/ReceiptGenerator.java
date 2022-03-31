@@ -10,6 +10,7 @@ public class ReceiptGenerator {
 
     public Receipt generate(Basket basket) {
         var products = basket.getProducts();
+
         var productCount = products.stream()
                 .collect(Collectors.toMap(p -> p, p -> 1, Integer::sum));
 
