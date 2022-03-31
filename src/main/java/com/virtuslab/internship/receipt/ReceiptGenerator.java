@@ -1,21 +1,23 @@
 package com.virtuslab.internship.receipt;
 
 import com.virtuslab.internship.basket.Basket;
-import com.virtuslab.internship.product.Product;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class ReceiptGenerator {
 
     public Receipt generate(Basket basket) {
-        Map<Product, Integer> productCount = basket.getProducts().stream()
+        var products = basket.getProducts();
+        var productCount = products.stream()
                 .collect(Collectors.toMap(p -> p, p -> 1, Integer::sum));
-        List<ReceiptEntry> receiptEntries = basket.getProducts().stream()
+
+        var receiptEntries = products.stream()
                 .distinct()
                 .map(product -> new ReceiptEntry(product, productCount.get(product)))
                 .toList();
+
         return new Receipt(receiptEntries);
     }
 }

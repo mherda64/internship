@@ -13,6 +13,10 @@ public class Basket {
         products = new ArrayList<>();
     }
 
+    public Basket(List<Product> products) {
+        this.products = products;
+    }
+
     public void addProduct(Product product) {
         products.add(product);
     }

@@ -1,12 +1,14 @@
 package com.virtuslab.internship.receipt;
 
+import com.virtuslab.internship.discount.DiscountEnum;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public record Receipt(
         List<ReceiptEntry> entries,
-        List<String> discounts,
+        List<DiscountEnum> discounts,
         BigDecimal totalPrice) {
 
     public Receipt(List<ReceiptEntry> entries) {

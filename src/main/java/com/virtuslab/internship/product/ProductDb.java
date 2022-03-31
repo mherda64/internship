@@ -1,10 +1,14 @@
 package com.virtuslab.internship.product;
 
+import com.virtuslab.internship.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Repository;
+
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Repository
 public class ProductDb {
 
     private final Set<Product> products;
@@ -23,14 +27,14 @@ public class ProductDb {
                 new Product("Pork", Product.Type.MEAT, new BigDecimal(16)),
                 new Product("Steak", Product.Type.MEAT, new BigDecimal(50)),
                 new Product("Bread", Product.Type.GRAINS, new BigDecimal(5)),
-                new Product("Cereals", Product.Type.GRAINS,new BigDecimal(8))
+                new Product("Cereals", Product.Type.GRAINS, new BigDecimal(8))
         ).collect(Collectors.toSet());
     }
 
-    public Product getProduct(String productName) {
+    public Product getProduct(String productName) throws ResourceNotFoundException {
         return products.stream()
                 .filter(product -> productName.equals(product.name()))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product [%s] not found", productName)));
     }
 }
