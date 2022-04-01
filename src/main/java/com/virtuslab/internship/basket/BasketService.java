@@ -5,7 +5,7 @@ import com.virtuslab.internship.discount.Discount;
 import com.virtuslab.internship.discount.FifteenPercentDiscount;
 import com.virtuslab.internship.discount.TenPercentDiscount;
 import com.virtuslab.internship.exception.ResourceNotFoundException;
-import com.virtuslab.internship.product.ProductDb;
+import com.virtuslab.internship.product.ProductRepository;
 import com.virtuslab.internship.receipt.ReceiptGenerator;
 import com.virtuslab.internship.receipt.ReceiptMapper;
 import com.virtuslab.internship.receipt.dto.ReceiptDto;
@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class BasketService {
 
-    private final ProductDb productDb;
+    private final ProductRepository productRepository;
     private final ReceiptGenerator receiptGenerator;
     private final List<Discount> discounts = Stream.of(new TenPercentDiscount(), new FifteenPercentDiscount())
             .sorted(Comparator.comparing(Discount::getOrder))
@@ -33,7 +33,7 @@ public class BasketService {
         try {
             basket = new Basket(
                     basketDTO.products().stream()
-                            .map(dto -> productDb.getProduct(dto.name()))
+                            .map(dto -> productRepository.getProduct(dto.name()))
                             .toList()
             );
         } catch (ResourceNotFoundException e) {

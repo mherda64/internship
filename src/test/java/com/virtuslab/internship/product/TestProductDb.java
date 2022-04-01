@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Repository
-public class ProductDb implements ProductRepository {
+public class TestProductDb implements ProductRepository {
 
     private final Set<Product> products;
 
-    public ProductDb() {
+    public TestProductDb() {
         products = Stream.of(
                 new Product("Apple", Product.Type.FRUITS, new BigDecimal(2)),
                 new Product("Orange", Product.Type.FRUITS, new BigDecimal(5)),

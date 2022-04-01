@@ -1,6 +1,6 @@
 package com.virtuslab.internship.discount;
 
-import com.virtuslab.internship.product.ProductDb;
+import com.virtuslab.internship.product.TestProductDb;
 import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptEntry;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class TenPercentDiscountTest {
     @Test
     void shouldApply10PercentDiscountWhenPriceIsAbove50() {
         // Given
-        var productDb = new ProductDb();
+        var productDb = new TestProductDb();
         var cheese = productDb.getProduct(CHEESE);
         var steak = productDb.getProduct(STEAK);
         List<ReceiptEntry> receiptEntries = new ArrayList<>();
@@ -42,7 +42,7 @@ class TenPercentDiscountTest {
     @Test
     void shouldApply10PercentDiscountWhenPriceIsEqual50() {
         // Given
-        var productDb = new ProductDb();
+        var productDb = new TestProductDb();
         var steak = productDb.getProduct(STEAK);
         List<ReceiptEntry> receiptEntries = new ArrayList<>();
         receiptEntries.add(new ReceiptEntry(steak, 1));
@@ -62,7 +62,7 @@ class TenPercentDiscountTest {
     @Test
     void shouldNotApply10PercentDiscountWhenPriceIsBelow50() {
         // Given
-        var productDb = new ProductDb();
+        var productDb = new TestProductDb();
         var cheese = productDb.getProduct(CHEESE);
         List<ReceiptEntry> receiptEntries = new ArrayList<>();
         receiptEntries.add(new ReceiptEntry(cheese, 2));

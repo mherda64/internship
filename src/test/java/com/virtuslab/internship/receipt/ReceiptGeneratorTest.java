@@ -1,7 +1,7 @@
 package com.virtuslab.internship.receipt;
 
 import com.virtuslab.internship.basket.Basket;
-import com.virtuslab.internship.product.ProductDb;
+import com.virtuslab.internship.product.TestProductDb;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +13,7 @@ class ReceiptGeneratorTest {
     @Test
     void shouldGenerateReceiptForGivenBasket() {
         // Given
-        var productDb = new ProductDb();
+        var productDb = new TestProductDb();
         var cart = new Basket();
         var milk = productDb.getProduct("Milk");
         var bread = productDb.getProduct("Bread");

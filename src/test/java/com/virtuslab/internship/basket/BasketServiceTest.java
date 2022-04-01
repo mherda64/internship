@@ -5,7 +5,7 @@ import com.virtuslab.internship.discount.FifteenPercentDiscount;
 import com.virtuslab.internship.discount.TenPercentDiscount;
 import com.virtuslab.internship.exception.ResourceNotFoundException;
 import com.virtuslab.internship.product.Product;
-import com.virtuslab.internship.product.ProductDb;
+import com.virtuslab.internship.product.ProductRepository;
 import com.virtuslab.internship.product.dto.ProductRequestDto;
 import com.virtuslab.internship.receipt.Receipt;
 import com.virtuslab.internship.receipt.ReceiptEntry;
@@ -21,7 +21,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.endsWith;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,7 +32,7 @@ class BasketServiceTest {
     private final Product MEAT_PRODUCT = new Product("MeatProduct", Product.Type.MEAT, BigDecimal.valueOf(30));
 
     @Mock
-    private ProductDb productDb;
+    private ProductRepository productDb;
 
     @Mock
     private ReceiptGenerator receiptGenerator;
